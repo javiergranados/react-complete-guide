@@ -11,11 +11,21 @@ class App extends Component {
     ]
   }
 
+  incrementAgeHandler = () => {
+    this.setState({
+      persons: this.state.persons.map(person => {
+        person.age++
+        return person
+      })
+    })
+  }
+
   render () {
     return (
       <div className='App'>
         <h1>Hello world!</h1>
         {this.state.persons.map((person, i) => <Person key={i} name={person.name} age={person.age} />)}
+        <button onClick={this.incrementAgeHandler}>Increment age</button>
       </div>
     )
   }
