@@ -11,10 +11,10 @@ class App extends Component {
     ]
   }
 
-  incrementAgeHandler = () => {
+  incrementAgeHandler = (name) => {
     this.setState({
       persons: this.state.persons.map(person => {
-        person.age++
+        (person.name === name || name instanceof Object) && person.age++
         return person
       })
     })
@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>Hello world!</h1>
-        {this.state.persons.map((person, i) => <Person key={i} name={person.name} age={person.age} />)}
+        {this.state.persons.map((person, i) => <Person key={i} name={person.name} age={person.age} click={this.incrementAgeHandler} />)}
         <button onClick={this.incrementAgeHandler}>Increment age</button>
       </div>
     )
