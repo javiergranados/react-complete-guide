@@ -21,11 +21,19 @@ class App extends Component {
   }
 
   render () {
+    const buttonStyle = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    }
+
     return (
       <div className='App'>
         <h1>Hello world!</h1>
         {this.state.persons.map((person, i) => <Person key={i} name={person.name} age={person.age} click={this.incrementAgeHandler} />)}
-        <button onClick={this.incrementAgeHandler}>Increment age</button>
+        <button style={buttonStyle} onClick={this.incrementAgeHandler}>Increment age</button>
       </div>
     )
   }
