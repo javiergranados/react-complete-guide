@@ -8,7 +8,8 @@ class App extends Component {
       { name: 'Max', age: 27 },
       { name: 'John', age: 32 },
       { name: 'Samantha', age: 29 }
-    ]
+    ],
+    showPersons: false
   }
 
   incrementAgeHandler = (name) => {
@@ -17,6 +18,12 @@ class App extends Component {
         (person.name === name || name instanceof Object) && person.age++
         return person
       })
+    })
+  }
+
+  tooglePersonsHandler = () => {
+    this.setState({
+      showPersons: !this.state.showPersons
     })
   }
 
@@ -31,9 +38,14 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <h1>Hello world!</h1>
-        {this.state.persons.map((person, i) => <Person key={i} name={person.name} age={person.age} click={this.incrementAgeHandler} />)}
-        <button style={buttonStyle} onClick={this.incrementAgeHandler}>Increment age</button>
+        <h1>React complete guide</h1>
+        <button style={buttonStyle} className='toogleButton' onClick={this.tooglePersonsHandler}>Toogle persons</button>
+        { this.state.showPersons &&
+          <div>
+            <button style={buttonStyle} onClick={this.incrementAgeHandler}>Increment age</button>
+            {this.state.persons.map((person, i) => <Person key={i} name={person.name} age={person.age} click={this.incrementAgeHandler} />)}
+          </div>
+        }
       </div>
     )
   }

@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+
+.App .toogleButton{
+  margin-bottom: 25px;
+}
