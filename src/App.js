@@ -5,20 +5,32 @@ import Person from './Person/Person'
 class App extends Component {
   state = {
     persons: [
-      { name: 'Max', age: 27 },
-      { name: 'John', age: 32 },
-      { name: 'Samantha', age: 29 }
+      { id: 'person1', name: 'Max', age: 27 },
+      { id: 'person2', name: 'John', age: 32 },
+      { id: 'person3', name: 'Samantha', age: 29 }
     ],
     showPersons: false
   }
 
-  incrementAgeHandler = (name) => {
-    this.setState({
-      persons: this.state.persons.map(person => {
-        (person.name === name || name instanceof Object) && person.age++
-        return person
+  incrementAgeHandler = (id) => {
+    let persons = null
+
+    if (id) {
+      const personIndex = this.state.persons.findIndex(p => p.id === id)
+      const personUpdated = { ...this.state.persons[personIndex] }
+
+      personUpdated.age++
+
+      persons = [...this.state.persons]
+      persons[personIndex] = personUpdated
+    } else {
+      persons = this.state.persons.map(p => {
+        p.age++
+        return p
       })
-    })
+    }
+
+    this.setState({ persons: persons })
   }
 
   tooglePersonsHandler = () => {
@@ -39,11 +51,13 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>React complete guide</h1>
-        <button style={buttonStyle} className='toogleButton' onClick={this.tooglePersonsHandler}>Toogle persons</button>
+        <button style={buttonStyle} className='toogleButton' onClick={this.tooglePersonsHandler}>
+          {this.state.showPersons ? 'Hide' : 'Show'} persons
+        </button>
         { this.state.showPersons &&
           <div>
-            <button style={buttonStyle} onClick={this.incrementAgeHandler}>Increment age</button>
-            {this.state.persons.map((person, i) => <Person key={i} name={person.name} age={person.age} click={this.incrementAgeHandler} />)}
+            <button style={buttonStyle} onClick={() => this.incrementAgeHandler()}>Increment age all persons</button>
+            {this.state.persons.map(person => <Person key={person.id} id={person.id} name={person.name} age={person.age} click={this.incrementAgeHandler} />)}
           </div>
         }
       </div>
