@@ -6,8 +6,8 @@ class App extends Component {
   state = {
     persons: [
       { id: 'person1', name: 'Max', age: 27 },
-      { id: 'person2', name: 'John', age: 32 },
-      { id: 'person3', name: 'Samantha', age: 29 }
+      { id: 'person2', name: 'John', age: 42 },
+      { id: 'person3', name: 'Samantha', age: 39 }
     ],
     showPersons: false
   }
@@ -48,16 +48,20 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    const buttonToogleStyle = {...buttonStyle}
+    buttonToogleStyle.backgroundColor = this.state.showPersons ? 'red' : 'green'
+
     return (
       <div className='App'>
         <h1>React complete guide</h1>
-        <button style={buttonStyle} className='toogleButton' onClick={this.tooglePersonsHandler}>
+        <p>Person title will be yellow if his age is major than 45 and red if it's 50 or major</p>
+        <button style={buttonToogleStyle} className='toogleButton' onClick={this.tooglePersonsHandler}>
           {this.state.showPersons ? 'Hide' : 'Show'} persons
         </button>
         { this.state.showPersons &&
           <div>
             <button style={buttonStyle} onClick={() => this.incrementAgeHandler()}>Increment age all persons</button>
-            {this.state.persons.map(person => <Person key={person.id} id={person.id} name={person.name} age={person.age} click={this.incrementAgeHandler} />)}
+            {this.state.persons.map((person, i) => <Person key={person.id} id={person.id} name={person.name} age={person.age} click={this.incrementAgeHandler} index={i + 1} />)}
           </div>
         }
       </div>
