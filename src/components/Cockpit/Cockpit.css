@@ -1,0 +1,8 @@
+.Cockpit .toogleButton{
+  display: block;
+  margin: auto;
+}
+
+.Cockpit .incrementButton{
+  margin-top: 10px;
+}
