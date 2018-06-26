@@ -16,8 +16,10 @@ class App extends Component {
   }
 
   tooglePersonsHandler = () => {
-    this.setState({
-      showPersons: !this.state.showPersons
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !prevState.showPersons
+      }
     })
   }
 
